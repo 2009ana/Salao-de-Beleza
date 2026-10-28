@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: amigopet_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: AdocaoPets
+    ports:
+      - "3306:3306"
+
+  api:
+    build:
+      context: ./PetAdocaoApi_backup
+    container_name: amigopet_api
+    ports:
+      - "5000:8080"
+    depends_on:
+      - mysql

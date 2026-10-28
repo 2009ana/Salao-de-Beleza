@@ -1,0 +1,92 @@
+DOCUMENTO DE ESPECIFICAÇÃO DE REQUISITOS
+Sistema de Adoção de Pets
+1. Introdução
+O Sistema de adoção de Pets foi desenvolvido com o objetivo de auxiliar no gerenciamento do processo de adoção de animais. O sistema permite o cadastro de usuários, adotantes, animais disponíveis para adoção e o registro das adoções realizadas.
+2. Objetivos
+Objetivo Geral
+Desenvolver uma aplicação para facilitar o gerenciamento de adoções de animais.
+Objetivos Específicos
+    • Cadastrar usuários. 
+    • Cadastrar pets. 
+    • Registrar adotantes. 
+    • Controlar adoções. 
+    • Consultar informações  pets disponíveis. 
+3. Requisitos Funcionais
+RF01 - Cadastro de Usuários
+O sistema deve permitir o cadastro de usuários contendo:
+    • Nome 
+    • E-mail 
+    • Telefone 
+    • Endereço 
+RF02 - Cadastro de Pets
+O sistema deve permitir o cadastro de pets contendo:
+    • Nome 
+    • Espécie 
+    • Idade 
+    • Pelagem 
+    • Sexo 
+    • Status 
+RF03 - Cadastro de Adotantes
+O sistema deve permitir cadastrar adotantes vinculados a usuários previamente cadastrados.
+RF04 - Registro de Adoções
+O sistema deve permitir registrar a adoção de um pet por um adotante.
+RF05 - Consulta de Pets
+O sistema deve permitir consultar todos os pets cadastrados e seus respectivos status.
+RF06 - Consulta de Adoções
+O sistema deve permitir consultar as adoções realizadas.
+4. Requisitos Não Funcionais
+RNF01
+O sistema deverá possuir interface simples e intuitiva.
+RNF02
+O sistema deverá utilizar banco de dados MySQL.
+RNF03
+O sistema deverá ser desenvolvido utilizando:
+    • HTML 
+    • CSS 
+    • JavaScript 
+    • PHP 
+    • MySQL 
+RNF04
+O sistema deverá apresentar bom desempenho para consultas e cadastros.
+5. Regras de Negócio
+RN01
+Apenas pets com status “Disponível” poderão ser adotados.
+RN02
+Toda adoção deverá estar vinculada a um adotante.
+RN03
+Todo adotante deverá estar associado a um usuário cadastrado.
+RN04
+Após a confirmação da adoção, o status do pet deverá ser alterado para "Adotado".
+6. Modelo de Dados
+O banco de dados Ã© composto pelas seguintes entidades:
+Usuário
+    • id_usuario 
+    • nome 
+    • email 
+    • telefone 
+    • endereco 
+Pets
+    • id_pet 
+    • nome 
+    • especie 
+    • idade 
+    • pelagem 
+    • sexo 
+    • status 
+Adotantes
+    • id_adotante 
+    • id_usuario 
+Adoções
+    • id_adocao 
+    • id_pet 
+    • id_adotante 
+    • data_adocao 
+    • status 
+7. Relacionamentos
+    • Um usuário pode estar associado a um ou mais adotantes. 
+    • Um adotante pode realizar uma ou mais adoções. 
+    • Um pet pode participar de uma ou mais solicitações de adoção. 
+    • Uma adoção relaciona um pet e um adotante. 
+8. Conclusão
+O Sistema de Adoção de Pets tem como finalidade organizar e facilitar o processo de adoção de animais, permitindo o gerenciamento eficiente de usuários, adotantes, pets e adoções.
+
