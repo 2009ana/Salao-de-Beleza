@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Salao de Beleza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+            color: #333;
+        }
+        h1 { color: #1f4e79; }
+        h2 { color: #2e75b6; margin-top: 30px; }
+        input {
+            padding: 8px;
+            margin: 4px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 8px 16px;
+            background: #2e75b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        button:hover { background: #1f4e79; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th { background: #1f4e79; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Salao de Beleza</h1>
+
+    <h2>Cadastrar cliente</h2>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="text" id="telefone" placeholder="Telefone">
+    <input type="email" id="email" placeholder="Email">
+    <button onclick="cadastrarCliente()">Cadastrar</button>
+
+    <h2>Clientes cadastrados</h2>
+    <button onclick="carregarClientes()">Atualizar lista</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Telefone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="listaClientes"></tbody>
+    </table>
+
+    <script>
+        // Endereco base da API. Como o frontend esta dentro do proprio
+        // backend (wwwroot), usamos caminho relativo.
+        const API = "/api/clientes";
+
+        // Busca a lista de clientes (GET) e monta a tabela.
+        async function carregarClientes() {
+            const resposta = await fetch(API);
+            const clientes = await resposta.json();
+
+            const tabela = document.getElementById("listaClientes");
+            tabela.innerHTML = "";
+
+            clientes.forEach(c => {
+                const linha = document.createElement("tr");
+                linha.innerHTML =
+                    "<td>" + c.id + "</td>" +
+                    "<td>" + c.nome + "</td>" +
+                    "<td>" + c.telefone + "</td>" +
+                    "<td>" + c.email + "</td>";
+                tabela.appendChild(linha);
+            });
+        }
+
+        // Envia um novo cliente para a API (POST).
+        async function cadastrarCliente() {
+            const nome = document.getElementById("nome").value;
+            const telefone = document.getElementById("telefone").value;
+            const email = document.getElementById("email").value;
+
+            await fetch(API, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, telefone, email })
+            });
+
+            // Limpa os campos e recarrega a lista.
+            document.getElementById("nome").value = "";
+            document.getElementById("telefone").value = "";
+            document.getElementById("email").value = "";
+            carregarClientes();
+        }
+
+        // Carrega a lista assim que a pagina abre.
+        carregarClientes();
+    </script>
+</body>
+</html>
